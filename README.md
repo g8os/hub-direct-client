@@ -30,13 +30,13 @@ hubclient.set_auth_header('bearer %s' % jwt)
 ```
 
 Checking for keys existance. **Warning**: keys must be `binary`, they will be base64 encoded on client-side.
-```
+```python
 req = remote.exists.exists_post([b"key1", b"key2"])
 keys = req.json()
 ```
 
 Inserting non existing keys contents (now, you need to base64 yourself keys and content):
-```
+```python
 upload = ()
 upload += (('files[]', (base64.b64encode(b"key1"), base64.b64encode(b"HelloWorld"))),)
 upload += (('files[]', (base64.b64encode(b"key2"), base64.b64encode(b"HelloWorldMultiData"))),)
