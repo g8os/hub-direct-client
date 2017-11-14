@@ -29,10 +29,11 @@ hubclient = Client('https://direct.hub.gig.tech')
 hubclient.set_auth_header('bearer %s' % jwt)
 ```
 
-Checking for keys existance. **Warning**: keys must be `binary`, they will be base64 encoded on client-side.
+Checking for keys existance. The resulting list are keys not found on the backend.
+
+**Warning**: keys must be `binary`, they will be base64 encoded on client-side.
 ```python
-req = remote.exists.exists_post([b"key1", b"key2"])
-keys = req.json()
+notfound = hubclient.api.exists.exists_post([b"key1", b"key2"]).json()
 ```
 
 Inserting non existing keys contents (now, you need to base64 yourself keys and content):
@@ -41,7 +42,7 @@ upload = ()
 upload += (('files[]', (base64.b64encode(b"key1"), base64.b64encode(b"HelloWorld"))),)
 upload += (('files[]', (base64.b64encode(b"key2"), base64.b64encode(b"HelloWorldMultiData"))),)
 
-remote.insert.insert_put(upload)
+hubclient.api.insert.insert_put(upload)
 ```
 
 **Warning**: if you try to insert a key already existing, by security, the whole insertion is stopped.
