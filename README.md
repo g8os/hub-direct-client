@@ -1,5 +1,11 @@
-# G8OS Hub Direct Client
+# Zero-OS Hub Direct Client
 Python client to query and send data to a `hub-direct-server`
+
+# Installation
+This module is installable via pip:
+```
+pip install --user -e 'git+https://github.com/zero-os/hub-direct-client#egg=hubdirect'
+```
 
 # Authentification
 This service allows you to upload data to the backend, with authentification.
@@ -25,6 +31,8 @@ jwt = response.content.decode('utf-8')
 
 Link your jwt to the client:
 ```python
+from zeroos.hubdirect import Client
+
 hubclient = Client('https://direct.hub.gig.tech')
 hubclient.set_auth_header('bearer %s' % jwt)
 ```
